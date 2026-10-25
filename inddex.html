@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>إلى رواء 🌹</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Amiri:ital,wght@1,700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Cairo',sans-serif; }
+  body {
+    min-height:100vh;
+    background:linear-gradient(135deg,#ffe0ec 0%,#ffc2d9 40%,#ffb3d1 100%);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden; position:relative; padding:20px;
+  }
+
+  /* قلوب متطايرة */
+  .heart {
+    position:fixed; bottom:-50px; font-size:24px;
+    animation:float 8s linear infinite;
+    opacity:0.7; pointer-events:none; z-index:1;
+  }
+  @keyframes float {
+    to { transform:translateY(-110vh) rotate(360deg); opacity:0; }
+  }
+
+  /* البطاقة */
+  .card {
+    background:rgba(255,255,255,0.85);
+    backdrop-filter:blur(15px);
+    border-radius:30px;
+    padding:50px 40px;
+    max-width:600px; width:100%;
+    text-align:center;
+    box-shadow:0 20px 60px rgba(255,105,150,0.3);
+    border:1px solid rgba(255,255,255,0.6);
+    position:relative; z-index:2;
+    animation:fadeIn 1.2s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity:0; transform:translateY(30px) scale(0.95); }
+    to { opacity:1; transform:none; }
+  }
+
+  .rose {
+    font-size:60px; margin-bottom:15px;
+    animation:sway 3s ease-in-out infinite;
+  }
+  @keyframes sway {
+    0%,100% { transform:rotate(-8deg); }
+    50% { transform:rotate(8deg); }
+  }
+
+  h1 {
+    font-family:'Amiri',serif;
+    font-size:clamp(32px,6vw,48px);
+    color:#c2185b;
+    margin-bottom:10px;
+    font-weight:700;
+  }
+  h1 span { color:#e91e63; }
+
+  .subtitle {
+    color:#ad1457; font-size:16px; margin-bottom:30px;
+    opacity:0.8;
+  }
+
+  /* تأثير الكتابة */
+  .message {
+    font-size:clamp(17px,2.5vw,21px);
+    line-height:1.9; color:#4a1529;
+    min-height:120px; margin-bottom:25px;
+    font-weight:700;
+  }
+  .cursor {
+    display:inline-block; width:2px; height:1.1em;
+    background:#e91e63; margin-right:2px;
+    vertical-align:middle; animation:blink 0.8s infinite;
+  }
+  @keyframes blink { 50% { opacity:0; } }
+
+  /* الزر */
+  .btn {
+    background:linear-gradient(135deg,#ff4d94,#e91e63);
+    color:#fff; border:none;
+    padding:16px 45px; border-radius:50px;
+    font-size:18px; font-weight:900;
+    cursor:pointer; transition:0.3s;
+    box-shadow:0 8px 25px rgba(233,30,99,0.4);
+  }
+  .btn:hover {
+    transform:translateY(-3px) scale(1.05);
+    box-shadow:0 12px 35px rgba(233,30,99,0.6);
+  }
+  .btn:active { transform:scale(0.98); }
+
+  /* الرسالة المخفية */
+  .hidden-msg {
+    display:none;
+    margin-top:25px;
+    padding:25px;
+    background:linear-gradient(135deg,#fff0f5,#ffe0ec);
+    border-radius:20px;
+    border:2px dashed #ff80ab;
+    animation:popIn 0.6s ease;
+  }
+  .hidden-msg.show { display:block; }
+  @keyframes popIn {
+    from { opacity:0; transform:scale(0.8); }
+    to { opacity:1; transform:scale(1); }
+  }
+  .hidden-msg p {
+    color:#c2185b; font-size:18px; line-height:2;
+    font-weight:700;
+  }
+  .hidden-msg .big {
+    font-family:'Amiri',serif;
+    font-size:26px; color:#e91e63;
+    display:block; margin-top:10px;
+  }
+
+  .footer-note {
+    margin-top:25px; font-size:13px;
+    color:#ad1457; opacity:0.6;
+  }
+
+  /* زر الموسيقى */
+  .music-btn {
+    position:fixed; top:20px; left:20px;
+    background:rgba(255,255,255,0.8);
+    border:none; width:50px; height:50px;
+    border-radius:50%; font-size:22px;
+    cursor:pointer; z-index:10;
+    box-shadow:0 5px 15px rgba(233,30,99,0.3);
+    transition:0.3s;
+  }
+  .music-btn:hover { transform:scale(1.1); }
+</style>
+</head>
+<body>
+
+<!-- قلوب متطايرة -->
+<div class="hearts" id="hearts"></div>
+
+<button class="music-btn" onclick="toggleMusic()" title="موسيقى">🎵</button>
+
+<div class="card">
+  <div class="rose">🌹</div>
+  <h1>إلى <span>رواء</span></h1>
+  <p class="subtitle">رسالة خاصة لك وحدك 💌</p>
+
+  <div class="message" id="message"></div>
+
+  <button class="btn" id="revealBtn" onclick="revealMessage()">افتحي المفاجأة 💝</button>
+
+  <div class="hidden-msg" id="hiddenMsg">
+    <p>
+      رواء،<br>
+      اسمك حلو مثل الورد 🌸<br>
+      ووجودك يفرّح القلب<br>
+      ويخلي اليوم أحلى
+      <span class="big">أنتِ رائعة كما أنتِ 💖</span>
+    </p>
+  </div>
+
+  <p class="footer-note">صُنع بكل حب 💕</p>
+</div>
+
+<script>
+// النص اللي يظهر حرف حرف
+const fullText = "رواء… وش أقول عنك؟ كل الكلام الحلو يطلع صغير قدامك 🌷";
+const msgEl = document.getElementById('message');
+let i = 0;
+
+function typeText() {
+  if (i < fullText.length) {
+    msgEl.innerHTML = fullText.substring(0, i + 1) + '<span class="cursor"></span>';
+    i++;
+    setTimeout(typeText, 70);
+  } else {
+    msgEl.innerHTML = fullText + '<span class="cursor"></span>';
+  }
+}
+setTimeout(typeText, 800);
+
+// القلوب
+function createHeart() {
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  heart.textContent = ['💕','💖','🌸','💗','🌷','✨'][Math.floor(Math.random()*6)];
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+  heart.style.fontSize = (16 + Math.random() * 20) + 'px';
+  document.getElementById('hearts').appendChild(heart);
+  setTimeout(() => heart.remove(), 10000);
+}
+setInterval(createHeart, 500);
+
+// زر المفاجأة
+function revealMessage() {
+  const hidden = document.getElementById('hiddenMsg');
+  const btn = document.getElementById('revealBtn');
+  hidden.classList.add('show');
+  btn.textContent
